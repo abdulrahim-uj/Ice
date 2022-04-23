@@ -717,11 +717,3 @@ meterpreter > run post/windows/manage/enable_rdp
 meterpreter > 
 
 ===================================================================================================================
-BADGE: https://tryhackme.com/p/AbdulRahimK?show_achievement_badge=ice
-https://twitter.com/intent/tweet?url=https%3A%2F%2Ftryhackme.com/room/ice&via=realtryhackme&text=Ice%20-%20I%20have%20just%20completed%20this%20room!%20Check%20it%20out:%20&hashtags=tryhackme%2Cwindows%2Cnmap%2Cmimikatz%2Cmetasploit%2Cicecast%2Cice
-
-https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftryhackme.com
-
-https://www.linkedin.com/sharing/share-offsite/?url=https://tryhackme.com/room/ice
-
-
